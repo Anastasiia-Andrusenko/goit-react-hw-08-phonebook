@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  gap: 12px;
+}
+
+.icon {
+  color: rgba(0, 0, 0, 0.8);
+  vertical-align: text-bottom;
+  padding: 0;
+  font-size: 18px;
+  margin-left: 5px;
+}
+
+.link {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(47, 47, 47, 0.1);
+  background-color: transparent;
+  transition: all 250ms linear;
+}
+
+.link.active {
+  color: rgb(0, 0, 0);
+  border-color: rgba(47, 47, 47, 0.9);
+}
