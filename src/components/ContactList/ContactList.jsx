@@ -1,18 +1,22 @@
 
 import { Contact } from "./Contact/Contact";
 import { useSelector } from "react-redux";
-
+import { selectAllContacts, selectFilter } from "redux/contacts/selectors";
 
 import css from '../ContactList/ContactList.module.css';
 
+
 export const ContactList = () => {
-  const contacts = useSelector(store => store.contacts);
-  const filter = useSelector(store => store.filter);
+  // const contacts = useSelector(store => store.contacts);
+  // const filter = useSelector(store => store.filter);
+  const contacts = useSelector(selectAllContacts);
+  const filter = useSelector(selectFilter);
 
   const filterContacts = () => {
     if (!filter) {
       return contacts;
     }
+
 
     const normalizedValue = filter.toLowerCase();
     const filteredContactsArray = contacts.filter(contact =>
@@ -23,12 +27,10 @@ export const ContactList = () => {
 
   const filteredContacts = filterContacts();
 
-
-
   return <ul className="">
     {filteredContacts.length > 0 ? filteredContacts.map((contact =>
       <Contact key={contact.id} contact={contact}/>
-    )) : <p className={css.message}> no matches <span className={css.smile}>☹</span></p>}
+    )) : <p className={css.message}> no contacts <span className={css.smile}>☹</span></p>}
   </ul>
 }
 

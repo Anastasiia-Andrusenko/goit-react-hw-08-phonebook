@@ -2,11 +2,13 @@
 import '../../src/index.css';
 
 
-import { lazy } from 'react';
-// import { useDispatch } from 'react-redux';
+import { lazy, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './Layout';
+import { useAuth } from 'hooks/useAuth';
+import { refreshUser } from 'redux/auth/operations';
 
 
 
@@ -17,8 +19,15 @@ const ContactsPage = lazy(() => import('../pages/Contacts/Contacts'));
 
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
-  return <div className="container">
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch])
+
+  return isRefreshing ? (<b>Refreshing user...</b>): (
+    <div className="container">
         <div className="in_container">
           <Routes>
             <Route path='/' element={<Layout/>}>
@@ -40,6 +49,7 @@ const App = () => {
         </div>
         <div className="circle"></div>
       </div>
+  )
 }
 
 export default App;

@@ -13,8 +13,6 @@ const AppBar = () => {
     <header className={css.header}>
       <Navigation />
       {isLoggedIn ? <UserMenu/> : <AuthNav/>}
-      {/* <UserMenu /> */}
-      {/* <AuthNav/> */}
     </header>
   )
 }

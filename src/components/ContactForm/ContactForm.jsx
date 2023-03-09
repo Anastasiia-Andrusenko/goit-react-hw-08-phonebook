@@ -1,15 +1,16 @@
 
 import css from "../ContactForm/ContactForm.module.css";
 import classNames from "classnames";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addContact } from "../../redux/slices/contactSlice";
+import { addContact } from "../../redux/contacts/operations";
+import { selectAllContacts } from "redux/contacts/selectors";
 
 const ContactForm = () => {
 
-  const contacts = useSelector(store => store.contacts);
   const dispatch = useDispatch();
   
+  const contacts = useSelector(selectAllContacts);
   const toggleForm = (evt) => {
     // console.log(evt.target);
     const btnRef = evt.target;
@@ -29,21 +30,23 @@ const ContactForm = () => {
   const onAddContact = (evt) => {
     evt.preventDefault();
     const input = evt.target;
-    const name = input.name.value;
-    const number = input.number.value;
-    // console.log(name);
-
+    const name = input.name.value.trim() ;
+    const number = input.number.value.trim() ;
 
     const equalName = contacts.find(
       element => element.name.toLowerCase() === name.toLowerCase());
 
     if (equalName) return alert(`${equalName.name} is already in contacts.`);
 
-    const action = addContact({ name, number });
-    dispatch(action);
-    
-    input.name.value = "";
-    input.number.value = "";
+
+    if (name && number !== '') {
+      // console.log({ name, number });
+      dispatch(addContact({ name, number }));
+      input.name.value = "";
+      input.number.value = "";
+      return;
+    }
+    alert('Contact cannot be empty. Enter some text!');
   }
 
   return <div className={css.container}>
