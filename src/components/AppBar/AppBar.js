@@ -7,7 +7,7 @@ const AppBar = () => {
   return (
     <header className={css.header}>
       <Navigation />
-      {/* <UserMenu /> */}
+      <UserMenu />
       <AuthNav/>
     </header>
   )
