@@ -3,14 +3,18 @@ import css from './AuthNav.module.css';
 import { IoLogIn } from 'react-icons/io5';
 import { MdOutlineManageAccounts } from 'react-icons/md';
 
+const getClassName = ({ isActive }) => {
+  return isActive ? `${css.btn} ${css.current}` : css.btn;
+}
+
 const AuthNav = () => {
   return (
     <div className={css.container}>
-      <NavLink className={css.btn} to="/register">
+      <NavLink className={getClassName} to="/register">
         Register
         <MdOutlineManageAccounts className={css.icon} />
       </NavLink>
-      <NavLink className={css.btn} to="/login">
+      <NavLink className={getClassName} to="/login">
         Log In
         <IoLogIn className={css.icon} />
       </NavLink>

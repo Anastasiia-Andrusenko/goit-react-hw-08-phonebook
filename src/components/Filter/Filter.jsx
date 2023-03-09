@@ -1,5 +1,4 @@
 
-// !!!!!!!!!!!!!! підписуємося на фільтр в сторі
 import {useSelector, useDispatch } from "react-redux";
 import { setFilter } from "redux/slices/filterSlice"; 
 

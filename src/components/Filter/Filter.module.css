@@ -12,6 +12,14 @@
   cursor: text;
   margin-top: 2px;
   font-size: 16px;
+  padding-left: 6px;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: rgb(162, 252, 246);
 }
 
 .label {

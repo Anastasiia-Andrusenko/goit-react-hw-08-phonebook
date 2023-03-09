@@ -1,8 +1,11 @@
 .container {
+  height: 50vh;
   text-align: center;
+  position: relative;
 }
 
 .title {
+  margin-top: 60px;
   font-size: 34px;
   line-height: 2.3rem;
 }
@@ -14,7 +17,9 @@
 }
 
 .caption {
-  margin-top: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 140px;
   font-size: 14px;
   color: rgb(49, 83, 91);
 }

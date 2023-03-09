@@ -27,8 +27,7 @@
   appearance: none;
   background-color: #ebfcea;
   border-radius: 40em;
-  border-style: none;
-  box-shadow: #bcbfc4 0 -12px 6px inset;
+  border: 2px solid rgba(0, 0, 0, 0.5);
 
   color: #241b1b;
   cursor: pointer;
@@ -38,11 +37,6 @@
   line-height: 0;
   margin: 0;
   margin-left: calc(100% - 40px);
-  outline: none;
-  padding: 8px;
-  quotes: auto;
-  text-align: center;
-  vertical-align: top;
   text-decoration: none;
   transition: all 0.15s;
   user-select: none;
@@ -53,9 +47,9 @@
 
 .btn:hover {
   background-color: #7bff29b8;
-  box-shadow: #065c09c2 0 -6px 8px inset;
   transform: scale(1.13);
   color: black;
+  border: 2px solid rgb(0, 0, 0);
 }
 
 .add {
@@ -79,4 +73,12 @@
   margin: 2px 0 10px 0;
   font-size: 18px;
   font-weight: 500;
+  padding-left: 6px;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: rgb(162, 252, 246);
 }

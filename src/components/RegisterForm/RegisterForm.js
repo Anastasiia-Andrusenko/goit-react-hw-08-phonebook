@@ -5,18 +5,21 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import { FiMail } from 'react-icons/fi';
 import { RiLockPasswordLine } from 'react-icons/ri';
 
+import { register } from 'redux/auth/operations';
+
 const RegisterForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
+
     dispatch(
-      // register({
-      //   name: form.elements.name.value,
-      //   email: form.elements.email.value,
-      //   password: form.elements.password.value,
-      // })
+      register({
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
     );
     form.reset();
   };

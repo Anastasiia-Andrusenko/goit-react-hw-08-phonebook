@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 import css from './LoginForm.module.css';
 import { IoLogIn } from 'react-icons/io5';
 import { FiMail } from 'react-icons/fi';
@@ -11,10 +12,10 @@ const LoginForm = () => {
     e.preventDefault();
     const form = e.currentTarget;
     dispatch(
-      // logIn({s
-      //   email: form.elements.email.value,
-      //   password: form.elements.password.value,
-      // })
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
     );
     form.reset();
   };

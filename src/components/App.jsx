@@ -1,22 +1,13 @@
 
 import '../../src/index.css';
-// import { ContactList } from "./ContactList/ContactList";
-// import ContactForm from "./ContactForm/ContactForm";
-// import Filter from "./Filter/Filter";
 
-import { useEffect, lazy } from 'react';
-import { useDispatch } from 'react-redux';
+
+import { lazy } from 'react';
+// import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { Provider } from "react-redux";
-import {store, persistor} from "../redux/store";
 
-import { PersistGate } from 'redux-persist/integration/react';
-import AppBar from './AppBar/AppBar';
-import Login from '../pages/Login/Login';
-import Register from '../pages/Register/Register';
-import { Contact } from './ContactList/Contact/Contact';
-import Contacts from '../pages/Contacts/Contacts';
-import Home from '../pages/Home/Home';
+import Layout from './Layout';
+
 
 
 const HomePage = lazy(() => import('../pages/Home/Home'));
@@ -27,17 +18,28 @@ const ContactsPage = lazy(() => import('../pages/Contacts/Contacts'));
 
 const App = () => {
 
-  return <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <div className="container">
+  return <div className="container">
         <div className="in_container">
-
-          
+          <Routes>
+            <Route path='/' element={<Layout/>}>
+              <Route index element={<HomePage/>} />
+              <Route
+                path='/register'
+                element={<RegisterPage/>}
+              />
+              <Route
+                path='/login'
+                element={<LoginPage/>}
+              />
+              <Route
+                path='/contacts'
+                element={<ContactsPage/>}
+              />
+            </Route>
+          </Routes>
         </div>
         <div className="circle"></div>
       </div>
-    </PersistGate>
-  </Provider>
 }
 
 export default App;
