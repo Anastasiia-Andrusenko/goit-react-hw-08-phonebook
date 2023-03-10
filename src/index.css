@@ -34,6 +34,7 @@ a {
 }
 
 .in_container {
+  text-align: center;
   height: 68vh;
   padding: 20px;
   border: 1px solid black;

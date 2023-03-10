@@ -1,16 +1,31 @@
 
 import css from "../ContactForm/ContactForm.module.css";
+
+import { toast } from "react-toastify";
+
+
+import { ColorRing } from 'react-loader-spinner';
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addContact } from "../../redux/contacts/operations";
-import { selectAllContacts } from "redux/contacts/selectors";
+import { selectAllContacts, selectLoading } from "redux/contacts/selectors";
+import { useEffect, useState } from "react";
 
 const ContactForm = () => {
+  const [adding, setAdding] = useState(false);
 
   const dispatch = useDispatch();
-  
+
   const contacts = useSelector(selectAllContacts);
+  const isLoading = useSelector(selectLoading);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setAdding(false);
+    }
+  }, [isLoading])
+
   const toggleForm = (evt) => {
     // console.log(evt.target);
     const btnRef = evt.target;
@@ -31,23 +46,29 @@ const ContactForm = () => {
     evt.preventDefault();
     const input = evt.target;
     const name = input.name.value.trim() ;
-    const number = input.number.value.trim() ;
+    const number = input.number.value.trim();
+    
 
     const equalName = contacts.find(
       element => element.name.toLowerCase() === name.toLowerCase());
 
-    if (equalName) return alert(`${equalName.name} is already in contacts.`);
+    if (equalName) {
+      setAdding(false);
+      toast.error(`${equalName.name} is already in contacts.`)
+      return;
+    }
 
 
     if (name && number !== '') {
-      // console.log({ name, number });
       dispatch(addContact({ name, number }));
+      toast.success("Contact added successfully");
       input.name.value = "";
       input.number.value = "";
       return;
-    }
-    alert('Contact cannot be empty. Enter some text!');
+    } 
+    toast.warn("Contact cannot be empty. Enter some text!");
   }
+
 
   return <div className={css.container}>
       <button type="button" className={css.btn} onClick={toggleForm}>+</button>
@@ -74,10 +95,19 @@ const ContactForm = () => {
             required
           ></input>
         </label>
-        <button type="submit" className={classNames(css.btn, css.add)}>Add contact</button>
+      <button type="submit" className={classNames(css.btn, css.add)} onClick={() => setAdding(true)}>{adding ? <ColorRing
+  visible={true}
+  height="22"
+  width="22"
+  ariaLabel="blocks-loading"
+  wrapperStyle={{}}
+  wrapperClass="blocks-wrapper"
+  colors={[]}
+/> : 'Add contact'}</button>
       </form>
       </div>
 
 }
 
 export default ContactForm;
+

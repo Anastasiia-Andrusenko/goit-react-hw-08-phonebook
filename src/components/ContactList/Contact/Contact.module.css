@@ -21,11 +21,13 @@
 }
 
 .name {
+  text-align: start;
   font-weight: 500;
   transition: all 250ms linear;
 }
 
 .number {
+  text-align: start;
   margin-top: 5px;
   font-weight: 900;
 }
@@ -40,11 +42,11 @@
   color: #000000;
   cursor: pointer;
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   margin: 0;
   outline: none;
-  padding: 5px 10px;
+  padding: 4px 10px;
   text-align: center;
   text-decoration: none;
   transition: all 0.15s;

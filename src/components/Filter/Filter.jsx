@@ -9,14 +9,15 @@ const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(store => store.filter);
   
-const onInput = (evt) => {
+  const onInput = (evt) => {
+  
     const filterValue = evt.currentTarget.value.trim();
     // console.log(filterValue);
     dispatch(setFilter(filterValue));
 };
   
   return <div className={css.box}>
-      <form name="search" className={css.form}>
+      <form name="search" className={css.form} onSubmit={(evt) => evt.preventDefault()}>
         <label className={css.label}>
           Find contacts by name
           <input type="search"

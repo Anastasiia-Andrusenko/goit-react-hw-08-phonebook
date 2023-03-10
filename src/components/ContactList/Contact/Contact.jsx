@@ -1,4 +1,5 @@
 import css from "../Contact/Contact.module.css";
+import { toast } from "react-toastify";
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 
@@ -13,6 +14,7 @@ export const Contact = ({ contact }) => {
   const handleDeleteContact = id => {
     const action = deleteContact(id);
     dispatch(action);
+    toast.warn(`Contact ${contact.name} deleted!`);
   }
 
   return <>

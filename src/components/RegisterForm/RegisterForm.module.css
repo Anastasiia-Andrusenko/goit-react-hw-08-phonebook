@@ -33,11 +33,11 @@
   margin-top: 10px;
   width: fit-content;
   color: rgba(56, 56, 56, 0.6);
+  background-color: white;
   font-weight: 500;
   padding: 4px 8px;
   border-radius: 8px;
   border: 1px solid rgba(47, 47, 47, 0.6);
-  background-color: transparent;
   transform: scale(1.1);
   transition: all 250ms linear;
 }
@@ -47,7 +47,6 @@
   transform: scale(1.2);
   color: rgb(37, 0, 0);
   border: 2px solid rgb(0, 0, 0);
-  background-color: white;
 }
 
 .icon {

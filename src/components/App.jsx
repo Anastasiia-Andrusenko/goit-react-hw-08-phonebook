@@ -10,7 +10,9 @@ import Layout from './Layout';
 import { useAuth } from 'hooks/useAuth';
 import { refreshUser } from 'redux/auth/operations';
 
-
+import { ProgressBar } from 'react-loader-spinner';
+import { PrivateRoute } from './PrivateRoute';
+import { RestrictedRoute } from './RestrictedRoute';
 
 const HomePage = lazy(() => import('../pages/Home/Home'));
 const RegisterPage = lazy(() => import('../pages/Register/Register'));
@@ -24,32 +26,32 @@ const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch])
+  }, [dispatch]) 
 
-  return isRefreshing ? (<b>Refreshing user...</b>): (
-    <div className="container">
+  return <div className="container">
         <div className="in_container">
-          <Routes>
+          {isRefreshing ? <ProgressBar
+            height="80"
+            width="80"
+            ariaLabel="progress-bar-loading"
+            wrapperStyle={{}}
+            wrapperClass="progress-bar-wrapper"
+            borderColor='#000000'
+            barColor='#F033F3' /> : <Routes>
             <Route path='/' element={<Layout/>}>
               <Route index element={<HomePage/>} />
-              <Route
-                path='/register'
-                element={<RegisterPage/>}
+              <Route path='/register'
+                element={<RestrictedRoute redirectTo='/contacts' component={<RegisterPage />} />} 
               />
-              <Route
-                path='/login'
-                element={<LoginPage/>}
+              <Route path='/login'
+                element={<RestrictedRoute redirectTo='/contacts' component={<LoginPage />} />} 
               />
-              <Route
-                path='/contacts'
-                element={<ContactsPage/>}
-              />
+              <Route path='/contacts' element={<PrivateRoute redirectTo='/login' component={<ContactsPage/>}/>}/>
             </Route>
-          </Routes>
+          </Routes>}
         </div>
         <div className="circle"></div>
       </div>
-  )
 }
 
 export default App;
