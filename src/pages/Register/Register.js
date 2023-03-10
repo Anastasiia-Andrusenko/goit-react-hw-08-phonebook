@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { Navigate } from 'react-router-dom';
 
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -21,6 +22,7 @@ export default function Register() {
         <title>Registration</title>
       </Helmet>
       <RegisterForm />
+      <ToastContainer autoClose={2000} hideProgressBar closeOnClick/>
     </div>
   );
 }

@@ -17,15 +17,15 @@ const clearAuthHeader = () => {
 // Регистрация пользователя
 export const register = createAsyncThunk(
   'auth/register',
-  async (credentials, { rejectWithValue}) => {
+  async (credentials, thunkAPI) => {
     try {
       const result = await axios.post('/users/signup', credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(result.data.token);
       console.log(result.data);
       return result.data;
-    } catch ({response}) {
-      return rejectWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -51,8 +51,8 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     await axios.post('/users/logout');
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
-  } catch ({response}) {
-      return thunkAPI.rejectWithValue(response);
+  } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
   }
 });
 

@@ -5,6 +5,10 @@ import { IoLogIn } from 'react-icons/io5';
 import { FiMail } from 'react-icons/fi';
 import { RiLockPasswordLine } from 'react-icons/ri';
 
+import { useSelector } from 'react-redux';
+import { selectError } from 'redux/auth/selectors';
+import { toast } from "react-toastify";
+
 const LoginForm = () => {
   const dispatch = useDispatch();
 
@@ -17,8 +21,16 @@ const LoginForm = () => {
         password: form.elements.password.value,
       })
     );
-    form.reset();
+    // form.reset();
   };
+
+  const error = useSelector(selectError);
+  // console.log(error);
+
+  if (error) {
+    toast.error(`${error}`);
+  }
+
 
   return (
     <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
